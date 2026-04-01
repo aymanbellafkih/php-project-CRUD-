@@ -1,0 +1,65 @@
+﻿{# templates/terrain/show.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Détails du terrain{% endblock %}
+
+{% block page_title %}🏟️ Détails du terrain{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1>Terrain: {{ terrain.nom }}</h1>
+
+    <table class="table table-bordered mt-3">
+        <tbody>
+            <tr>
+                <th>ID</th>
+                <td>{{ terrain.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ terrain.nom }}</td>
+            </tr>
+            <tr>
+                <th>Sport</th>
+                <td>{{ terrain.typeSport }}</td>
+            </tr>
+            <tr>
+                <th>Disponible</th>
+                <td>
+                    {% if terrain.disponibilite %}
+                        <span class="badge bg-success">✅ Oui</span>
+                    {% else %}
+                        <span class="badge bg-danger">❌ Non</span>
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>Date réservation</th>
+                <td>
+                    {% if terrain.dateReservation %}
+                        {{ terrain.dateReservation|date('d/m/Y H:i') }}
+                    {% else %}
+                        <span class="text-muted">Non réservé</span>
+                    {% endif %}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="btn-group mt-3" role="group">
+        <a href="{{ path('app_terrain_edit', {'id': terrain.id}) }}" class="btn btn-warning">
+            ✏️ Modifier
+        </a>
+
+        {# DELETE FORM #}
+        <form method="post" action="{{ path('app_terrain_delete', {'id': terrain.id}) }}" class="d-inline" onsubmit="return confirm('Voulez-vous vraiment supprimer ce terrain ?');">
+            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ terrain.id) }}">
+            <button class="btn btn-danger">🗑️ Supprimer</button>
+        </form>
+
+        <a href="{{ path('app_terrain_index') }}" class="btn btn-secondary">
+            🔙 Retour à la liste
+        </a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,55 @@
+﻿{% extends "base.html.twig" %}
+
+{% block title %}Ajouter un terrain{% endblock %}
+
+{% block page_title %}➕ Ajouter un nouveau terrain{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header bg-success text-white">
+            <h4 class="mb-0"><i class="bi bi-plus-circle"></i> Nouveau terrain sportif</h4>
+        </div>
+        
+        <div class="card-body">
+            {{ form_start(form) }}
+            
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Nom du terrain *</label>
+                    {{ form_widget(form.nom, {attr: {class: 'form-control', placeholder: 'Ex: Stade Municipal'}}) }}
+                </div>
+                
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Type de sport *</label>
+                    {{ form_widget(form.typeSport, {attr: {class: 'form-control'}}) }}
+                </div>
+                
+                <div class="col-md-6 mb-3">
+                    <div class="form-check">
+                        {{ form_widget(form.disponibilite, {attr: {class: 'form-check-input'}}) }}
+                        <label class="form-check-label">Terrain disponible</label>
+                    </div>
+                </div>
+                
+                <div class="col-md-6 mb-3">
+                    <label class="form-label">Date de réservation (optionnel)</label>
+                    {{ form_widget(form.dateReservation, {attr: {class: 'form-control'}}) }}
+                    <small class="form-text text-muted">Laissez vide si non réservé</small>
+                </div>
+            </div>
+            
+            <div class="mt-4">
+                <button type="submit" class="btn btn-success">
+                    <i class="bi bi-check-circle"></i> Enregistrer
+                </button>
+                <a href="/terrain/" class="btn btn-secondary">
+                    <i class="bi bi-arrow-left"></i> Retour à la liste
+                </a>
+            </div>
+            
+            {{ form_end(form) }}
+        </div>
+    </div>
+</div>
+{% endblock %}

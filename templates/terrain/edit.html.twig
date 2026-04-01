@@ -1,0 +1,26 @@
+﻿{% extends 'base.html.twig' %}
+
+{% block title %}Modifier le terrain{% endblock %}
+
+{% block page_title %}✏️ Modifier le terrain{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1>Modifier le terrain</h1>
+
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <button class="btn btn-success mt-3">💾 Enregistrer</button>
+    {{ form_end(form) }}
+
+    <hr class="my-4">
+
+    {# DELETE FORM #}
+    <form method="post" action="{{ path('app_terrain_delete', {'id': terrain.id}) }}" onsubmit="return confirm('Voulez-vous vraiment supprimer ce terrain ?');">
+        <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ terrain.id) }}">
+        <button class="btn btn-danger">🗑️ Supprimer</button>
+    </form>
+
+    <a href="{{ path('app_terrain_index') }}" class="btn btn-secondary mt-3">🔙 Retour</a>
+</div>
+{% endblock %}
